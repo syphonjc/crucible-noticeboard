@@ -108,7 +108,7 @@
     .tap-hint { position: absolute; bottom: 8px; right: 10px; font-size: 10px; color: #4a3a2a; }
     .notice-body { display: none; margin-top: 12px; padding-top: 12px; }
     .notice-body.visible { display: block; }
-    .notice-body-text { font-size: 14px; color: #c4b49a; line-height: 1.65; margin-bottom: 10px; }
+    .notice-body-text { font-size: 14px; color: #c4b49a; line-height: 1.65; margin-bottom: 10px; white-space: pre-line; }
     .notice-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
     .notice-footer-text { font-size: 11px; color: #5a4a3a; font-style: italic; }
     .notice-age { font-size: 10px; color: #4a3a2a; font-family: 'Cinzel', serif; letter-spacing: 0.06em; }
@@ -198,6 +198,38 @@ var NOTICES = [
     subtitle:'I read what the Crucible writes. No charge for looking.',
     body:"If your Mark has changed and you want to know what it means, sit down. Bring the arm. I have seen Marks at every stage. I do not work for the Consortium and I do not report to them. What you tell me stays at this table. I charge two silver for a reading and I will tell you plainly if I do not know the answer. I usually know the answer. Ask the barkeep to point you toward Sera.",
     footer:'Sera — no family name given', age:'Always here', torn:false,
+  },
+  {
+    id:'n8', type:'MISSING', typeLabel:'MISSING PERSON', icon:'&#128065;',
+    pinColour:'#5a3a00', paperTone:'#1f1800', paperBorder:'#3a2a00',
+    title:'LOOKING FOR LIO VENN',
+    subtitle:'Last seen entering the Crucible. Before the last Toll Bell. Please — any detail.',
+    body:"Young man, human, brown hair. Carries a notebook tied with string and a pack that is two sizes too big for him. Registered with the Crucible approximately one month ago.\n\nHe told me he'd be back in three days. That was before the last Toll Bell.\n\nI am not asking for heroics. I am asking if anyone who went through the Gate around that time saw him — on Floor 1, or after. Any detail, however small.\n\nI am staying at The Second Breath. Ask Mara.\n\n— E.C.",
+    footer:'Posted by: E.C.', age:'4 days old', torn:false,
+  },
+  {
+    id:'n9', type:'JOB', typeLabel:'WORK AVAILABLE', icon:'&#9874;',
+    pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010',
+    title:'REWARD — RECOVERY OF STOLEN PROPERTY',
+    subtitle:'A map. Very old. Taken by someone wearing a very large hat. 12 gold.',
+    body:"On the night of the Seventeenth Bell, someone entered the premises of Garro's Maps & Curiosities (Floor 5 Market, third passage left) and made off with one cartographical scroll described as follows: very old, smells faintly of something wrong, depicts a floor of the Crucible that does not currently exist.\n\nThe perpetrator was seen. They were short. They were wearing a very large hat. This is all the witness could say because the hat was very large.\n\nThe map is mine. I bought it legally. The fact that the Consortium has also sent an inquiry about it is entirely coincidental and I do not wish to discuss it.\n\nBring the map to Garro. Do not open it. Do not read it. Do not let it face north.\n\n12 gold upon return. 15 gold if you do not ask what floor it shows.",
+    footer:'Garro — Maps & Curiosities, Floor 5 Market', age:'2 days old', torn:false,
+  },
+  {
+    id:'n10', type:'SHOP', typeLabel:'SERVICES', icon:'&#129689;',
+    pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e',
+    title:'RELIABLE DELIVERY — DISCRETION GUARANTEED',
+    subtitle:'Licensed courier. Documents, packages, messages. Ask for Bevil.',
+    body:"BEVIL — Licensed courier, registered with the Tally House — is available for private deliveries within Bokrum and to the surrounding parishes.\n\nDocuments. Packages. Messages requiring a careful hand and a forgettable face.\n\nI do not read what I carry. I do not discuss what I carry. I arrive when I say I will arrive.\n\nRates negotiable. First delivery discounted for those who come recommended.\n\nAsk for Bevil at the Tally House counter, or leave word at The Second Breath.",
+    footer:'Bevil — Tally House courier', age:'Posted today', torn:false,
+  },
+  {
+    id:'n11', type:'NEWS', typeLabel:'PUBLIC NOTICE', icon:'&#128220;',
+    pinColour:'#1a3a5c', paperTone:'#12181f', paperBorder:'#1e3048',
+    title:'NOTICE — BOKRUM HEALTH OFFICE',
+    subtitle:'Fever of unknown origin reported at the Third Passage Gate. Citizens advised.',
+    body:"Travellers arriving via the Eastern Road from the Gilded Isles or the Pens District waystation are advised that a fever of unknown origin has been reported among transit workers at the Third Passage Gate.\n\nSymptoms include: persistent dry cough, discolouration of the fingertips (grey to black), and in advanced cases, a reported sensation of hearing things that are not present.\n\nThe Destiny Consortium has confirmed this is NOT related to Mark exposure and that there is NO cause for concern among registered delvers.\n\nQuarantine protocols are NOT currently in effect.\n\nCitizens experiencing symptoms should report to their local Bokrum Health Registry at the Civic Quarter. Do NOT attend the Crucible Gate unannounced.\n\n— Oswin Pell, Acting Clerk, Bokrum Health Office",
+    footer:'Issued by: Bokrum Health Office', age:'Posted today', torn:false,
   },
 ];
 
