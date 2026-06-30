@@ -8,256 +8,283 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Crimson Pro', Georgia, serif;
-      background: #0a0805;
-      color: #d4c9b8;
-      min-height: 100vh;
-      padding-bottom: 60px;
-    }
-    #board-header {
-      background: #0f0a05;
-      background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(60,30,10,0.3) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(40,20,5,0.2) 0%, transparent 50%);
-      border-bottom: 1px solid #2a1800;
-      padding: 20px 18px 16px;
-    }
-    #board-location {
-      font-family: 'Cinzel', serif;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: #5a4030;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    #board-title {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: #c9a96e;
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }
-    #board-sub { font-size: 13px; color: #5a4a38; font-style: italic; }
-    #nail-row { display: flex; gap: 6px; margin-top: 14px; }
-    .nail { width: 6px; height: 6px; border-radius: 50%; background: #3a2510; border: 1px solid #5a3a18; }
-    #filter-bar {
-      padding: 12px 18px;
-      border-bottom: 1px solid #1a1008;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      padding: 6px 12px;
-      background: none;
-      border: 1px solid #2a1f10;
-      border-radius: 3px;
-      color: #5a4a3a;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .filter-btn.active { background: #2a1800; border-color: #c9a96e; color: #c9a96e; }
-    .filter-btn:hover:not(.active) { border-color: #4a3a2a; color: #8a7a64; }
-    #notice-list { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
-    .notice-card {
-      border-radius: 4px;
-      padding: 14px 14px 12px;
-      cursor: pointer;
-      position: relative;
-      transition: transform 0.12s, box-shadow 0.12s;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
-    }
-    .notice-card.torn {
-      clip-path: polygon(0 0, 92% 0, 100% 4%, 100% 100%, 0 100%);
-      border-radius: 4px 8px 6px 5px;
-    }
-    .notice-card.open { transform: scale(1.01); box-shadow: 0 6px 20px rgba(0,0,0,0.7); }
-    .pin {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.15);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.1);
-      margin: 0 auto 10px;
-    }
-    .notice-type-row {
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .notice-title {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: #c9a96e;
-      line-height: 1.3;
-      margin-bottom: 5px;
-    }
-    .notice-title.torn-title { font-size: 11px; color: #8a6050; font-style: italic; }
-    .notice-subtitle { font-size: 12px; color: #8a7a64; font-style: italic; line-height: 1.4; }
-    .tap-hint { position: absolute; bottom: 8px; right: 10px; font-size: 10px; color: #4a3a2a; }
-    .notice-body { display: none; margin-top: 12px; padding-top: 12px; }
-    .notice-body.visible { display: block; }
-    .notice-body-text { font-size: 14px; color: #c4b49a; line-height: 1.65; margin-bottom: 10px; white-space: pre-line; }
-    .notice-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
-    .notice-footer-text { font-size: 11px; color: #5a4a3a; font-style: italic; }
-    .notice-age { font-size: 10px; color: #4a3a2a; font-family: 'Cinzel', serif; letter-spacing: 0.06em; }
-    #board-footer {
-      padding: 0 18px;
-      text-align: center;
-      font-size: 11px;
-      color: #3a2a1a;
-      font-style: italic;
-      margin-top: 8px;
-    }
+    body { font-family:'Crimson Pro',Georgia,serif; background:#0a0805; color:#d4c9b8; min-height:100vh; padding-bottom:60px; }
+
+    /* HEADER */
+    #board-header { background:#0f0a05; background-image:radial-gradient(ellipse at 20% 50%,rgba(60,30,10,.3) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(40,20,5,.2) 0%,transparent 50%); border-bottom:1px solid #2a1800; padding:20px 18px 16px; }
+    #board-location { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.2em; color:#5a4030; text-transform:uppercase; margin-bottom:6px; }
+    #board-title { font-family:'Cinzel',serif; font-size:22px; font-weight:700; color:#c9a96e; line-height:1.1; margin-bottom:4px; }
+    #board-sub { font-size:13px; color:#5a4a38; font-style:italic; }
+    #nail-row { display:flex; gap:6px; margin-top:14px; }
+    .nail { width:6px; height:6px; border-radius:50%; background:#3a2510; border:1px solid #5a3a18; }
+
+    /* FILTER BAR */
+    #filter-bar { padding:12px 18px; border-bottom:1px solid #1a1008; display:flex; gap:6px; flex-wrap:wrap; }
+    .filter-btn { font-family:'Cinzel',serif; font-size:10px; font-weight:600; letter-spacing:.1em; padding:6px 12px; background:none; border:1px solid #2a1f10; border-radius:3px; color:#5a4a3a; cursor:pointer; transition:all .15s; }
+    .filter-btn.active { background:#2a1800; border-color:#c9a96e; color:#c9a96e; }
+    .filter-btn:hover:not(.active) { border-color:#4a3a2a; color:#8a7a64; }
+    .filter-btn.note-filter { border-color:#2a3510; color:#4a5a2a; }
+    .filter-btn.note-filter.active { background:#1a2008; border-color:#8a9a4a; color:#a0b05a; }
+
+    /* POST BAR */
+    #post-bar { padding:8px 18px; border-bottom:1px solid #131008; display:flex; align-items:center; gap:10px; background:#0c0b05; }
+    #post-note-btn { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.1em; padding:5px 12px; background:none; border:1px solid #2a3a18; border-radius:3px; color:#4a6030; cursor:pointer; transition:all .15s; }
+    #post-note-btn:hover { border-color:#5a8030; color:#7aaa50; background:#0c1208; }
+    #post-bar-hint { font-size:11px; color:#2a3018; font-style:italic; }
+
+    /* NOTICE LIST */
+    #notice-list { padding:16px 18px; display:flex; flex-direction:column; gap:12px; }
+
+    /* TORN STUB */
+    .torn-stub { border-radius:4px; padding:9px 14px; opacity:.28; clip-path:polygon(0 3%,65% 0,88% 4%,100% 1%,100% 100%,0 100%); background:#0c0905; border:1px solid #1a0f05; display:flex; align-items:center; gap:10px; }
+    .torn-stub-pin { width:8px; height:8px; border-radius:50%; background:#2a1a08; flex-shrink:0; }
+    .torn-stub-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.12em; color:#2a1a0a; }
+    .torn-stub-name { font-size:10px; color:#1f1408; font-style:italic; margin-left:auto; padding-left:8px; text-align:right; }
+
+    /* NOTICE CARD */
+    .notice-card { border-radius:4px; padding:14px 14px 12px; cursor:pointer; position:relative; transition:transform .12s,box-shadow .12s; box-shadow:0 3px 8px rgba(0,0,0,.5); }
+    .notice-card.torn-look { clip-path:polygon(0 0,92% 0,100% 4%,100% 100%,0 100%); border-radius:4px 8px 6px 5px; }
+    .notice-card.open { transform:scale(1.01); box-shadow:0 6px 20px rgba(0,0,0,.7); }
+    .notice-card.player-card { border-left:2px solid #7a7020 !important; }
+
+    .pin { width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,.15); box-shadow:0 2px 4px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1); margin:0 auto 10px; }
+
+    .notice-type-row { font-size:9px; letter-spacing:.12em; font-family:'Cinzel',serif; font-weight:700; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+    .notice-title { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:#c9a96e; line-height:1.3; margin-bottom:5px; }
+    .notice-title.torn-t { font-size:11px; color:#8a6050; font-style:italic; }
+    .player-card .notice-title { color:#c0b040; }
+    .notice-subtitle { font-size:12px; color:#8a7a64; font-style:italic; line-height:1.4; }
+    .tap-hint { position:absolute; bottom:8px; right:10px; font-size:10px; color:#4a3a2a; }
+
+    .notice-body { display:none; margin-top:12px; padding-top:12px; }
+    .notice-body.visible { display:block; }
+    .notice-body-text { font-size:14px; color:#c4b49a; line-height:1.65; margin-bottom:10px; white-space:pre-line; }
+    .notice-footer-row { display:flex; justify-content:space-between; align-items:center; margin-top:4px; margin-bottom:12px; }
+    .notice-footer-text { font-size:11px; color:#5a4a3a; font-style:italic; }
+    .notice-age { font-size:10px; color:#4a3a2a; font-family:'Cinzel',serif; letter-spacing:.06em; }
+
+    /* CARD ACTIONS */
+    .card-actions { display:flex; gap:6px; padding-top:10px; border-top:1px solid rgba(60,30,10,.25); }
+    .card-actions button { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.08em; padding:5px 10px; border-radius:3px; cursor:pointer; border:1px solid; transition:all .15s; }
+    .tear-down-btn { background:#160606; border-color:#3a1010; color:#6a2828; }
+    .tear-down-btn:hover { border-color:#7a2020; color:#b03030; background:#1e0808; }
+    .remove-own-btn { background:#060e06; border-color:#1a3018; color:#3a6030; }
+    .remove-own-btn:hover { border-color:#3a6030; color:#5a9050; }
+
+    /* FOOTER */
+    #board-footer { padding:0 18px; text-align:center; font-size:11px; color:#3a2a1a; font-style:italic; margin-top:8px; }
+
+    /* TOAST */
+    #toast { position:fixed; bottom:70px; left:50%; transform:translateX(-50%); background:#2a1800; border:1px solid #c9a96e; border-radius:4px; padding:8px 16px; font-family:'Cinzel',serif; font-size:11px; color:#c9a96e; letter-spacing:.08em; opacity:0; transition:opacity .3s; z-index:200; white-space:nowrap; pointer-events:none; }
+    #toast.visible { opacity:1; }
+
+    /* MODAL SHARED */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); align-items:center; justify-content:center; z-index:100; padding:24px; }
+    .modal-overlay.visible { display:flex; }
+    .modal-overlay.slide-up { align-items:flex-end; padding:0; }
+
+    /* POST MODAL */
+    #post-box { background:#0e0d06; border:1px solid #2a3518; border-radius:8px 8px 0 0; padding:20px 18px 36px; width:100%; max-width:480px; max-height:82vh; overflow-y:auto; }
+    #post-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    #post-heading { font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:#a0b050; letter-spacing:.06em; }
+    .modal-close { background:none; border:none; color:#5a4a3a; font-size:18px; cursor:pointer; padding:0 4px; line-height:1; }
+    #post-hint { font-size:12px; color:#3a4a20; font-style:italic; margin-bottom:14px; line-height:1.5; }
+    .field-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.12em; color:#5a6a38; margin-bottom:4px; display:block; }
+    .field-group { margin-bottom:12px; }
+    .field-input, .field-textarea { width:100%; background:#080d05; border:1px solid #1e2a10; border-radius:3px; padding:8px 10px; color:#c4b49a; font-family:'Crimson Pro',serif; font-size:14px; outline:none; transition:border-color .15s; }
+    .field-input:focus, .field-textarea:focus { border-color:#4a5a28; }
+    .field-textarea { resize:vertical; min-height:90px; }
+    #post-buttons { display:flex; gap:8px; margin-top:16px; }
+    #post-submit { flex:2; background:#162008; border:1px solid #5a8030; border-radius:4px; color:#80b048; font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; padding:10px 0; cursor:pointer; font-weight:600; }
+    #post-cancel-btn { flex:1; background:none; border:1px solid #2a1f10; border-radius:4px; color:#5a4a3a; font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; padding:10px 0; cursor:pointer; }
+
+    /* TEAR MODAL */
+    #tear-box { background:#100808; border:1px solid #3a1818; border-radius:6px; padding:22px 20px; width:100%; max-width:340px; }
+    #tear-title { font-family:'Cinzel',serif; font-size:12px; font-weight:700; color:#b03030; letter-spacing:.08em; margin-bottom:8px; }
+    #tear-flavour { font-size:13px; color:#6a4040; font-style:italic; line-height:1.55; margin-bottom:14px; }
+    .tear-dc-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.1em; color:#7a3030; margin-bottom:14px; }
+    .mod-row { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+    .mod-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.1em; color:#5a3030; }
+    #tear-mod { width:60px; background:#0a0505; border:1px solid #2e1010; border-radius:3px; padding:6px 8px; color:#c4b49a; font-family:'Crimson Pro',serif; font-size:16px; text-align:center; outline:none; }
+    #tear-btn-stack { display:flex; flex-direction:column; gap:7px; }
+    .t-attempt { background:#200a0a; border:1px solid #7a2020; border-radius:4px; color:#b03030; font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; padding:10px 0; cursor:pointer; font-weight:600; width:100%; }
+    .t-openly  { background:none; border:1px solid #2e2010; border-radius:4px; color:#5a4020; font-family:'Cinzel',serif; font-size:10px; letter-spacing:.06em; padding:8px 0; cursor:pointer; width:100%; }
+    .t-cancel  { background:none; border:1px solid #1a1008; border-radius:4px; color:#2e2010; font-family:'Cinzel',serif; font-size:10px; letter-spacing:.06em; padding:7px 0; cursor:pointer; width:100%; }
+
+    /* DICE ROLLING STATE */
+    #tear-rolling { display:none; text-align:center; padding:24px 0; }
+    #dice-num { font-family:'Cinzel',serif; font-size:56px; color:#c03030; line-height:1; display:block; }
+    #dice-lbl { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.12em; color:#3a1010; margin-top:4px; }
+
+    /* RESULT STATE */
+    #tear-result { display:none; }
+    #res-roll-line { font-size:13px; color:#7a5040; font-style:italic; margin-bottom:8px; font-family:'Crimson Pro',serif; }
+    #res-outcome { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.1em; margin-bottom:10px; }
+    #res-outcome.suc  { color:#3a8a3a; }
+    #res-outcome.fail { color:#8a3020; }
+    #res-outcome.open { color:#7a5020; }
+    #res-text { font-size:14px; color:#c4b0a0; line-height:1.65; font-style:italic; margin-bottom:8px; }
+    #res-extra { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.08em; color:#4a3020; margin-bottom:18px; }
+    #res-close { width:100%; background:#180808; border:1px solid #3a1818; border-radius:4px; color:#7a3030; font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; padding:10px 0; cursor:pointer; }
   </style>
 </head>
 <body>
-  <div id="board-header">
-    <div id="board-location">The Second Breath &mdash; Bokrum</div>
-    <div id="board-title">Notice Board</div>
-    <div id="board-sub">Post at your own risk. The management is not responsible for the accuracy of claims made herein.</div>
-    <div id="nail-row">
-      <div class="nail"></div><div class="nail"></div>
-      <div class="nail"></div><div class="nail"></div>
+
+<div id="board-header">
+  <div id="board-location">The Second Breath &mdash; Bokrum</div>
+  <div id="board-title">Notice Board</div>
+  <div id="board-sub">Post at your own risk. The management is not responsible for the accuracy of claims made herein.</div>
+  <div id="nail-row"><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div></div>
+</div>
+
+<div id="filter-bar">
+  <button class="filter-btn active" data-filter="ALL">All Notices</button>
+  <button class="filter-btn" data-filter="JOB">Work</button>
+  <button class="filter-btn" data-filter="NEWS">News</button>
+  <button class="filter-btn" data-filter="SHOP">Traders</button>
+  <button class="filter-btn" data-filter="MISSING">Missing</button>
+  <button class="filter-btn note-filter" data-filter="NOTE">My Notes</button>
+</div>
+
+<div id="post-bar">
+  <button id="post-note-btn">&#128204; PIN A NOTE</button>
+  <span id="post-bar-hint">Leave a message on the board</span>
+</div>
+
+<div id="notice-list"></div>
+<div id="board-footer">Tap any notice to read in full.</div>
+<div id="toast"></div>
+
+<!-- POST MODAL -->
+<div id="post-overlay" class="modal-overlay slide-up">
+  <div id="post-box">
+    <div id="post-header">
+      <span id="post-heading">&#128204; PIN A NOTE</span>
+      <button class="modal-close" id="post-x">&#x2715;</button>
+    </div>
+    <div id="post-hint">Your note will appear on the board for anyone in the tavern to read. It is pinned locally — show the DM to make it canon.</div>
+    <div class="field-group">
+      <label class="field-label">YOUR NAME OR ALIAS (leave blank for anonymous)</label>
+      <input class="field-input" id="post-name" type="text" placeholder="e.g. Suki, The Hooded One, A Concerned Citizen..." />
+    </div>
+    <div class="field-group">
+      <label class="field-label">YOUR NOTE</label>
+      <textarea class="field-textarea" id="post-body" rows="5" placeholder="Write what you want pinned to the board..."></textarea>
+    </div>
+    <div id="post-buttons">
+      <button id="post-submit">PIN TO BOARD</button>
+      <button id="post-cancel-btn">CANCEL</button>
     </div>
   </div>
-  <div id="filter-bar">
-    <button class="filter-btn active" data-filter="ALL">All Notices</button>
-    <button class="filter-btn" data-filter="JOB">Work</button>
-    <button class="filter-btn" data-filter="NEWS">News</button>
-    <button class="filter-btn" data-filter="SHOP">Traders</button>
-    <button class="filter-btn" data-filter="MISSING">Missing</button>
+</div>
+
+<!-- TEAR MODAL -->
+<div id="tear-overlay" class="modal-overlay">
+  <div id="tear-box">
+    <div id="tear-title">&#9986; TEAR DOWN THIS NOTICE</div>
+
+    <!-- Pre-roll -->
+    <div id="tear-pre">
+      <div id="tear-flavour">You reach toward the board. If someone is watching, they will see you do this. Roll to see if anyone noticed.</div>
+      <div class="tear-dc-label">DC 12 — SLEIGHT OF HAND</div>
+      <div class="mod-row">
+        <span class="mod-label">YOUR MODIFIER</span>
+        <input id="tear-mod" type="number" value="0" min="-5" max="10" />
+      </div>
+      <div id="tear-btn-stack">
+        <button class="t-attempt" id="t-attempt">&#127922; ATTEMPT REMOVAL</button>
+        <button class="t-openly"  id="t-openly">TAKE IT OPENLY &mdash; you will be seen</button>
+        <button class="t-cancel"  id="t-cancel">CANCEL</button>
+      </div>
+    </div>
+
+    <!-- Rolling -->
+    <div id="tear-rolling">
+      <span id="dice-num">—</span>
+      <div id="dice-lbl">ROLLING...</div>
+    </div>
+
+    <!-- Result -->
+    <div id="tear-result">
+      <div id="res-roll-line"></div>
+      <div id="res-outcome"></div>
+      <div id="res-text"></div>
+      <div id="res-extra"></div>
+      <button id="res-close">CLOSE</button>
+    </div>
   </div>
-  <div id="notice-list"></div>
-  <div id="board-footer">Tap any notice to read in full.</div>
+</div>
+
 <script>
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+var TORN_KEY   = 'crucible_torn_v1';
+var PLAYER_KEY = 'crucible_player_v1';
+function loadTorn()   { try{var r=localStorage.getItem(TORN_KEY);   return r?JSON.parse(r):[];}catch(e){return[];} }
+function saveTorn()   { try{localStorage.setItem(TORN_KEY,   JSON.stringify(tornIds));}catch(e){} }
+function loadPlayer() { try{var r=localStorage.getItem(PLAYER_KEY); return r?JSON.parse(r):[];}catch(e){return[];} }
+function savePlayer() { try{localStorage.setItem(PLAYER_KEY, JSON.stringify(playerNotices));}catch(e){} }
+
+var tornIds       = loadTorn();
+var playerNotices = loadPlayer();
+
+// ── DEFAULT NOTICES ───────────────────────────────────────────────────────────
 var NOTICES = [
-  {
-    id:'n1', type:'JOB', typeLabel:'WORK AVAILABLE', icon:'&#9874;',
-    pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010',
-    title:'CARGO ESCORT REQUIRED',
-    subtitle:'Aurum Row to the East Gate. Two days. Armed preferred.',
-    body:'Merchant Orvel Drast seeks two to four capable individuals to accompany a sealed wagon from his Aurum Row warehouse to the East Gate staging post. Cargo is not your concern. Discretion is. Pay is four gold per person, half on departure. No questions asked is considered part of the agreement. Inquire at the Drast & Sons counting room, third door past the Weigh Gate, before dusk on any day this tenday.',
-    footer:'Posted by: Drast & Sons Haulage', age:'3 days old', torn:false,
-  },
-  {
-    id:'n2', type:'NEWS', typeLabel:'PUBLIC NOTICE', icon:'&#128220;',
-    pinColour:'#1a3a5c', paperTone:'#12181f', paperBorder:'#1e3048',
-    title:'GILDED BANNER REACHES FLOOR 63',
-    subtitle:'The Consortium congratulates its premier sponsored party.',
-    body:'By announcement of the Destiny Consortium Registry, the Gilded Banner delving party has confirmed clearance of Floor 63 as of the fourteenth of this month. They remain under active sponsorship and are expected to resume descent within the fortnight. The Grand Concourse scoreboard has been updated accordingly. Citizens are reminded that all Floor 60 and above records are administered under the Crownright Provisional Charter and may not be reproduced without Consortium licence.',
-    footer:'Issued by: The Destiny Consortium Registry', age:'6 days old', torn:false,
-  },
-  {
-    id:'n3', type:'SHOP', typeLabel:'TRADER', icon:'&#129689;',
-    pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e',
-    title:"OLD MARRA'S GOODS",
-    subtitle:'Maps. Salvage. Things the Crucible spat back out.',
-    body:'Old Marra trades in what others leave behind. Floor maps of the Exhibition Band (Floors 1-5), partial charts of Floors 6-10, and assorted salvage recovered from returning delvers. She does not ask where items came from. She sells what she has. Prices are fair for what you get, which is more than most can say. Find her at the east corner of the Concourse outer ring, under the canvas with the red stripe. She is usually there. When she is not, do not wait.',
-    footer:'Old Marra — no fixed hours', age:'Permanent fixture', torn:false,
-  },
-  {
-    id:'n4', type:'MISSING', typeLabel:'MISSING PERSON', icon:'&#128065;',
-    pinColour:'#5a3a00', paperTone:'#1f1800', paperBorder:'#3a2a00',
-    title:'HAVE YOU SEEN REN ASHVALE?',
-    subtitle:'Last seen entering the Crucible. Three weeks ago. Family is asking.',
-    body:"Ren Ashvale, aged twenty-two, brown hair, marked on her left forearm. She entered the Crucible as part of a registered party and has not returned to Bokrum. Her brother Davi is looking for news — not her body, just news. He is not a wealthy man but he is a desperate one. If you have seen her inside the Crucible, or know anything of her party, please speak to the barkeep here at the Second Breath and ask for Davi. He comes in most evenings.",
-    footer:'Posted by: Davi Ashvale, brother', age:'9 days old', torn:false,
-  },
-  {
-    id:'n5', type:'JOB', typeLabel:'WORK AVAILABLE', icon:'&#9874;',
-    pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010',
-    title:'FLOOR INTELLIGENCE WANTED',
-    subtitle:'Paying for verified scouting reports. Floors 6-10 only.',
-    body:"A private buyer is paying for written accounts of Floors 6 through 10 of the Crucible. Accounts must include room layout, hazard type, and any notable markings or anomalies observed. The buyer is not affiliated with the Consortium and requests that parties not mention this notice to Registry staff. Payment is two gold per verified floor account, five gold if the account includes a sketch map. Leave sealed reports with the barkeep addressed to the letter V.",
-    footer:'Anonymous — contact via the barkeep', age:'2 days old', torn:false,
-  },
-  {
-    id:'n6', type:'NEWS', typeLabel:'TORN NOTICE', icon:'&#128220;',
-    pinColour:'#3a1a1a', paperTone:'#1a0f0f', paperBorder:'#4a1a1a',
-    title:'[MOST OF THIS HAS BEEN TORN AWAY]',
-    subtitle:'...the Consortium assigns a... ...ask about Lio V...',
-    body:"The top two thirds of this notice have been removed. What remains reads: '...not the first time a fifth delver has...' and below that, torn mid-sentence: '...ask about Lio V...' Someone has scratched the word LIAR into the wood of the board next to where this was pinned. The ink on the surviving fragment is still relatively fresh.",
-    footer:'— author unknown', age:'Posted today — being removed', torn:true,
-  },
-  {
-    id:'n7', type:'SHOP', typeLabel:'SERVICES', icon:'&#129689;',
-    pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e',
-    title:'MARK-READER. THIRD TABLE FROM THE FIRE.',
-    subtitle:'I read what the Crucible writes. No charge for looking.',
-    body:"If your Mark has changed and you want to know what it means, sit down. Bring the arm. I have seen Marks at every stage. I do not work for the Consortium and I do not report to them. What you tell me stays at this table. I charge two silver for a reading and I will tell you plainly if I do not know the answer. I usually know the answer. Ask the barkeep to point you toward Sera.",
-    footer:'Sera — no family name given', age:'Always here', torn:false,
-  },
-  {
-    id:'n8', type:'MISSING', typeLabel:'MISSING PERSON', icon:'&#128065;',
-    pinColour:'#5a3a00', paperTone:'#1f1800', paperBorder:'#3a2a00',
-    title:'LOOKING FOR LIO VENN',
-    subtitle:'Last seen entering the Crucible. Before the last Toll Bell. Please — any detail.',
-    body:"Young man, human, brown hair. Carries a notebook tied with string and a pack that is two sizes too big for him. Registered with the Crucible approximately one month ago.\n\nHe told me he'd be back in three days. That was before the last Toll Bell.\n\nI am not asking for heroics. I am asking if anyone who went through the Gate around that time saw him — on Floor 1, or after. Any detail, however small.\n\nI am staying at The Second Breath. Ask Mara.\n\n— E.C.",
-    footer:'Posted by: E.C.', age:'4 days old', torn:false,
-  },
-  {
-    id:'n9', type:'JOB', typeLabel:'WORK AVAILABLE', icon:'&#9874;',
-    pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010',
-    title:'REWARD — RECOVERY OF STOLEN PROPERTY',
-    subtitle:'A map. Very old. Taken by someone wearing a very large hat. 12 gold.',
-    body:"On the night of the Seventeenth Bell, someone entered the premises of Garro's Maps & Curiosities (Floor 5 Market, third passage left) and made off with one cartographical scroll described as follows: very old, smells faintly of something wrong, depicts a floor of the Crucible that does not currently exist.\n\nThe perpetrator was seen. They were short. They were wearing a very large hat. This is all the witness could say because the hat was very large.\n\nThe map is mine. I bought it legally. The fact that the Consortium has also sent an inquiry about it is entirely coincidental and I do not wish to discuss it.\n\nBring the map to Garro. Do not open it. Do not read it. Do not let it face north.\n\n12 gold upon return. 15 gold if you do not ask what floor it shows.",
-    footer:'Garro — Maps & Curiosities, Floor 5 Market', age:'2 days old', torn:false,
-  },
-  {
-    id:'n10', type:'SHOP', typeLabel:'SERVICES', icon:'&#129689;',
-    pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e',
-    title:'RELIABLE DELIVERY — DISCRETION GUARANTEED',
-    subtitle:'Licensed courier. Documents, packages, messages. Ask for Bevil.',
-    body:"BEVIL — Licensed courier, registered with the Tally House — is available for private deliveries within Bokrum and to the surrounding parishes.\n\nDocuments. Packages. Messages requiring a careful hand and a forgettable face.\n\nI do not read what I carry. I do not discuss what I carry. I arrive when I say I will arrive.\n\nRates negotiable. First delivery discounted for those who come recommended.\n\nAsk for Bevil at the Tally House counter, or leave word at The Second Breath.",
-    footer:'Bevil — Tally House courier', age:'Posted today', torn:false,
-  },
-  {
-    id:'n11', type:'NEWS', typeLabel:'PUBLIC NOTICE', icon:'&#128220;',
-    pinColour:'#1a3a5c', paperTone:'#12181f', paperBorder:'#1e3048',
-    title:'NOTICE — BOKRUM HEALTH OFFICE',
-    subtitle:'Fever of unknown origin reported at the Third Passage Gate. Citizens advised.',
-    body:"Travellers arriving via the Eastern Road from the Gilded Isles or the Pens District waystation are advised that a fever of unknown origin has been reported among transit workers at the Third Passage Gate.\n\nSymptoms include: persistent dry cough, discolouration of the fingertips (grey to black), and in advanced cases, a reported sensation of hearing things that are not present.\n\nThe Destiny Consortium has confirmed this is NOT related to Mark exposure and that there is NO cause for concern among registered delvers.\n\nQuarantine protocols are NOT currently in effect.\n\nCitizens experiencing symptoms should report to their local Bokrum Health Registry at the Civic Quarter. Do NOT attend the Crucible Gate unannounced.\n\n— Oswin Pell, Acting Clerk, Bokrum Health Office",
-    footer:'Issued by: Bokrum Health Office', age:'Posted today', torn:false,
-  },
+  { id:'n1',  type:'JOB',     typeLabel:'WORK AVAILABLE',  icon:'&#9874;',   pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010', title:'CARGO ESCORT REQUIRED', subtitle:'Aurum Row to the East Gate. Two days. Armed preferred.', body:'Merchant Orvel Drast seeks two to four capable individuals to accompany a sealed wagon from his Aurum Row warehouse to the East Gate staging post. Cargo is not your concern. Discretion is. Pay is four gold per person, half on departure. No questions asked is considered part of the agreement. Inquire at the Drast & Sons counting room, third door past the Weigh Gate, before dusk on any day this tenday.', footer:'Posted by: Drast & Sons Haulage', age:'3 days old', torn:false },
+  { id:'n2',  type:'NEWS',    typeLabel:'PUBLIC NOTICE',   icon:'&#128220;', pinColour:'#1a3a5c', paperTone:'#12181f', paperBorder:'#1e3048', title:'GILDED BANNER REACHES FLOOR 63', subtitle:'The Consortium congratulates its premier sponsored party.', body:'By announcement of the Destiny Consortium Registry, the Gilded Banner delving party has confirmed clearance of Floor 63 as of the fourteenth of this month. They remain under active sponsorship and are expected to resume descent within the fortnight. The Grand Concourse scoreboard has been updated accordingly. Citizens are reminded that all Floor 60 and above records are administered under the Crownright Provisional Charter and may not be reproduced without Consortium licence.', footer:'Issued by: The Destiny Consortium Registry', age:'6 days old', torn:false },
+  { id:'n3',  type:'SHOP',    typeLabel:'TRADER',          icon:'&#129689;', pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e', title:"OLD MARRA'S GOODS", subtitle:'Maps. Salvage. Things the Crucible spat back out.', body:'Old Marra trades in what others leave behind. Floor maps of the Exhibition Band (Floors 1-5), partial charts of Floors 6-10, and assorted salvage recovered from returning delvers. She does not ask where items came from. She sells what she has. Prices are fair for what you get, which is more than most can say. Find her at the east corner of the Concourse outer ring, under the canvas with the red stripe. She is usually there. When she is not, do not wait.', footer:'Old Marra — no fixed hours', age:'Permanent fixture', torn:false },
+  { id:'n4',  type:'MISSING', typeLabel:'MISSING PERSON',  icon:'&#128065;', pinColour:'#5a3a00', paperTone:'#1f1800', paperBorder:'#3a2a00', title:'HAVE YOU SEEN REN ASHVALE?', subtitle:'Last seen entering the Crucible. Three weeks ago. Family is asking.', body:"Ren Ashvale, aged twenty-two, brown hair, marked on her left forearm. She entered the Crucible as part of a registered party and has not returned to Bokrum. Her brother Davi is looking for news — not her body, just news. He is not a wealthy man but he is a desperate one. If you have seen her inside the Crucible, or know anything of her party, please speak to the barkeep here at the Second Breath and ask for Davi. He comes in most evenings.", footer:'Posted by: Davi Ashvale, brother', age:'9 days old', torn:false },
+  { id:'n5',  type:'JOB',     typeLabel:'WORK AVAILABLE',  icon:'&#9874;',   pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010', title:'FLOOR INTELLIGENCE WANTED', subtitle:'Paying for verified scouting reports. Floors 6-10 only.', body:"A private buyer is paying for written accounts of Floors 6 through 10 of the Crucible. Accounts must include room layout, hazard type, and any notable markings or anomalies observed. The buyer is not affiliated with the Consortium and requests that parties not mention this notice to Registry staff. Payment is two gold per verified floor account, five gold if the account includes a sketch map. Leave sealed reports with the barkeep addressed to the letter V.", footer:'Anonymous — contact via the barkeep', age:'2 days old', torn:false },
+  { id:'n6',  type:'NEWS',    typeLabel:'TORN NOTICE',     icon:'&#128220;', pinColour:'#3a1a1a', paperTone:'#1a0f0f', paperBorder:'#4a1a1a', title:'[MOST OF THIS HAS BEEN TORN AWAY]', subtitle:'...the Consortium assigns a... ...ask about Lio V...', body:"The top two thirds of this notice have been removed. What remains reads: '...not the first time a fifth delver has...' and below that, torn mid-sentence: '...ask about Lio V...' Someone has scratched the word LIAR into the wood of the board next to where this was pinned. The ink on the surviving fragment is still relatively fresh.", footer:'— author unknown', age:'Posted today — being removed', torn:true },
+  { id:'n7',  type:'SHOP',    typeLabel:'SERVICES',        icon:'&#129689;', pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e', title:'MARK-READER. THIRD TABLE FROM THE FIRE.', subtitle:'I read what the Crucible writes. No charge for looking.', body:"If your Mark has changed and you want to know what it means, sit down. Bring the arm. I have seen Marks at every stage. I do not work for the Consortium and I do not report to them. What you tell me stays at this table. I charge two silver for a reading and I will tell you plainly if I do not know the answer. I usually know the answer. Ask the barkeep to point you toward Sera.", footer:'Sera — no family name given', age:'Always here', torn:false },
+  { id:'n8',  type:'MISSING', typeLabel:'MISSING PERSON',  icon:'&#128065;', pinColour:'#5a3a00', paperTone:'#1f1800', paperBorder:'#3a2a00', title:'LOOKING FOR LIO VENN', subtitle:'Last seen entering the Crucible. Before the last Toll Bell. Please — any detail.', body:"Young man, human, brown hair. Carries a notebook tied with string and a pack that is two sizes too big for him. Registered with the Crucible approximately one month ago.\n\nHe told me he'd be back in three days. That was before the last Toll Bell.\n\nI am not asking for heroics. I am asking if anyone who went through the Gate around that time saw him — on Floor 1, or after. Any detail, however small.\n\nI am staying at The Second Breath. Ask Mara.\n\n— E.C.", footer:'Posted by: E.C.', age:'4 days old', torn:false },
+  { id:'n9',  type:'JOB',     typeLabel:'WORK AVAILABLE',  icon:'&#9874;',   pinColour:'#8B2020', paperTone:'#2a1f10', paperBorder:'#4a3010', title:'REWARD — RECOVERY OF STOLEN PROPERTY', subtitle:'A map. Very old. Taken by someone wearing a very large hat. 12 gold.', body:"On the night of the Seventeenth Bell, someone entered the premises of Garro's Maps & Curiosities (Floor 5 Market, third passage left) and made off with one cartographical scroll described as follows: very old, smells faintly of something wrong, depicts a floor of the Crucible that does not currently exist.\n\nThe perpetrator was seen. They were short. They were wearing a very large hat. This is all the witness could say because the hat was very large.\n\nThe map is mine. I bought it legally. The fact that the Consortium has also sent an inquiry about it is entirely coincidental and I do not wish to discuss it.\n\nBring the map to Garro. Do not open it. Do not read it. Do not let it face north.\n\n12 gold upon return. 15 gold if you do not ask what floor it shows.", footer:'Garro — Maps & Curiosities, Floor 5 Market', age:'2 days old', torn:false },
+  { id:'n10', type:'SHOP',    typeLabel:'SERVICES',        icon:'&#129689;', pinColour:'#2a5a2a', paperTone:'#111a11', paperBorder:'#1e3a1e', title:'RELIABLE DELIVERY — DISCRETION GUARANTEED', subtitle:'Licensed courier. Documents, packages, messages. Ask for Bevil.', body:"BEVIL — Licensed courier, registered with the Tally House — is available for private deliveries within Bokrum and to the surrounding parishes.\n\nDocuments. Packages. Messages requiring a careful hand and a forgettable face.\n\nI do not read what I carry. I do not discuss what I carry. I arrive when I say I will arrive.\n\nRates negotiable. First delivery discounted for those who come recommended.\n\nAsk for Bevil at the Tally House counter, or leave word at The Second Breath.", footer:'Bevil — Tally House courier', age:'Posted today', torn:false },
+  { id:'n11', type:'NEWS',    typeLabel:'PUBLIC NOTICE',   icon:'&#128220;', pinColour:'#1a3a5c', paperTone:'#12181f', paperBorder:'#1e3048', title:'NOTICE — BOKRUM HEALTH OFFICE', subtitle:'Fever of unknown origin reported at the Third Passage Gate. Citizens advised.', body:"Travellers arriving via the Eastern Road from the Gilded Isles or the Pens District waystation are advised that a fever of unknown origin has been reported among transit workers at the Third Passage Gate.\n\nSymptoms include: persistent dry cough, discolouration of the fingertips (grey to black), and in advanced cases, a reported sensation of hearing things that are not present.\n\nThe Destiny Consortium has confirmed this is NOT related to Mark exposure and that there is NO cause for concern among registered delvers.\n\nQuarantine protocols are NOT currently in effect.\n\nCitizens experiencing symptoms should report to their local Bokrum Health Registry at the Civic Quarter. Do NOT attend the Crucible Gate unannounced.\n\n— Oswin Pell, Acting Clerk, Bokrum Health Office", footer:'Issued by: Bokrum Health Office', age:'Posted today', torn:false },
 ];
 
+// ── STATE ─────────────────────────────────────────────────────────────────────
 var openId = null;
 var filter = 'ALL';
+var tearTargetId = null;
 
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function esc(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function showToast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('visible'); setTimeout(function(){ t.classList.remove('visible'); },2600); }
+function allNotices(){ return NOTICES.concat(playerNotices); }
 
-function render() {
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
   var list = document.getElementById('notice-list');
   list.innerHTML = '';
-  var visible = filter === 'ALL' ? NOTICES : NOTICES.filter(function(n){ return n.type === filter; });
-  if (!visible.length) {
+  var all = allNotices();
+  var visible = all.filter(function(n){
+    if (filter !== 'ALL' && n.type !== filter) return false;
+    return true;
+  });
+  if (!visible.length){
     var e = document.createElement('div');
-    e.style.cssText = 'text-align:center;padding:40px 20px;color:#3a2a1a;font-style:italic;font-size:14px;';
-    e.textContent = 'No notices posted in this category.';
+    e.style.cssText = 'text-align:center;padding:40px 20px;color:#2a1a0a;font-style:italic;font-size:14px;';
+    e.textContent = 'No notices in this category.';
     list.appendChild(e); return;
   }
-  visible.forEach(function(n) {
-    var isOpen = openId === n.id;
+  visible.forEach(function(n){
+    if (tornIds.indexOf(n.id) !== -1){
+      if (n.type !== 'NOTE'){
+        var stub = document.createElement('div');
+        stub.className = 'torn-stub';
+        stub.innerHTML = '<div class="torn-stub-pin"></div><div class="torn-stub-label">[ NOTICE REMOVED ]</div><div class="torn-stub-name">' + esc(n.title) + '</div>';
+        list.appendChild(stub);
+      }
+      return;
+    }
+    var isOpen   = openId === n.id;
+    var isPlayer = n.type === 'NOTE';
+
     var card = document.createElement('div');
-    card.className = 'notice-card' + (n.torn ? ' torn' : '') + (isOpen ? ' open' : '');
+    card.className = 'notice-card' + (n.torn ? ' torn-look' : '') + (isOpen ? ' open' : '') + (isPlayer ? ' player-card' : '');
     card.style.background = n.paperTone;
     card.style.border = '1px solid ' + n.paperBorder;
-    if (isOpen) card.style.boxShadow = '0 6px 20px rgba(0,0,0,0.7), 0 0 0 1px ' + n.paperBorder;
+    if (isOpen) card.style.boxShadow = '0 6px 20px rgba(0,0,0,.7), 0 0 0 1px ' + n.paperBorder;
 
     var pin = document.createElement('div');
     pin.className = 'pin'; pin.style.background = n.pinColour;
@@ -265,11 +292,11 @@ function render() {
 
     var tr = document.createElement('div');
     tr.className = 'notice-type-row'; tr.style.color = n.pinColour;
-    tr.innerHTML = '<span>' + n.icon + '</span><span>' + esc(n.typeLabel) + '</span>';
+    tr.innerHTML = '<span>' + (n.icon||'') + '</span><span>' + esc(n.typeLabel) + '</span>';
     card.appendChild(tr);
 
     var title = document.createElement('div');
-    title.className = 'notice-title' + (n.torn ? ' torn-title' : '');
+    title.className = 'notice-title' + (n.torn ? ' torn-t' : '');
     title.textContent = n.title; card.appendChild(title);
 
     var sub = document.createElement('div');
@@ -279,25 +306,57 @@ function render() {
     var body = document.createElement('div');
     body.className = 'notice-body' + (isOpen ? ' visible' : '');
     body.style.borderTop = '1px solid ' + n.paperBorder;
+
     var bt = document.createElement('div');
     bt.className = 'notice-body-text'; bt.textContent = n.body;
     body.appendChild(bt);
+
     var fr = document.createElement('div');
     fr.className = 'notice-footer-row';
     fr.innerHTML = '<span class="notice-footer-text">' + esc(n.footer) + '</span><span class="notice-age">' + esc(n.age) + '</span>';
     body.appendChild(fr);
+
+    // Action buttons
+    var acts = document.createElement('div');
+    acts.className = 'card-actions';
+    acts.addEventListener('click', function(e){ e.stopPropagation(); });
+
+    if (isPlayer){
+      var rb = document.createElement('button');
+      rb.className = 'remove-own-btn';
+      rb.textContent = 'REMOVE MY NOTE';
+      rb.addEventListener('click', (function(nid){ return function(){
+        playerNotices = playerNotices.filter(function(p){ return p.id !== nid; });
+        savePlayer();
+        if (openId === nid) openId = null;
+        render();
+        showToast('Your note has been removed from the board.');
+      }; })(n.id));
+      acts.appendChild(rb);
+    } else {
+      var tb = document.createElement('button');
+      tb.className = 'tear-down-btn';
+      tb.textContent = '✂ TEAR THIS DOWN';
+      tb.addEventListener('click', (function(nid){ return function(){
+        openTearModal(nid);
+      }; })(n.id));
+      acts.appendChild(tb);
+    }
+
+    body.appendChild(acts);
     card.appendChild(body);
 
-    if (!isOpen) {
+    if (!isOpen){
       var hint = document.createElement('div');
       hint.className = 'tap-hint'; hint.textContent = 'tap to read';
       card.appendChild(hint);
     }
-    card.addEventListener('click', function(){ openId = (openId === n.id) ? null : n.id; render(); });
+    card.addEventListener('click', function(){ openId = (openId===n.id)?null:n.id; render(); });
     list.appendChild(card);
   });
 }
 
+// ── FILTERS ───────────────────────────────────────────────────────────────────
 document.querySelectorAll('.filter-btn').forEach(function(btn){
   btn.addEventListener('click', function(){
     filter = btn.dataset.filter; openId = null;
@@ -308,6 +367,140 @@ document.querySelectorAll('.filter-btn').forEach(function(btn){
   });
 });
 
+// ── TEAR MODAL ────────────────────────────────────────────────────────────────
+function setTearState(s){
+  document.getElementById('tear-pre').style.display     = s==='pre'     ? 'block' : 'none';
+  document.getElementById('tear-rolling').style.display = s==='rolling' ? 'block' : 'none';
+  document.getElementById('tear-result').style.display  = s==='result'  ? 'block' : 'none';
+}
+
+function openTearModal(id){
+  tearTargetId = id;
+  document.getElementById('tear-mod').value = '0';
+  setTearState('pre');
+  document.getElementById('tear-overlay').classList.add('visible');
+}
+
+function closeTearModal(){
+  document.getElementById('tear-overlay').classList.remove('visible');
+  tearTargetId = null;
+  render();
+}
+
+function rollDice(cb){
+  setTearState('rolling');
+  var el = document.getElementById('dice-num');
+  var i = 0;
+  function tick(){
+    el.textContent = Math.floor(Math.random()*20)+1;
+    i++;
+    if (i < 20){ setTimeout(tick, 35 + i*10); }
+    else {
+      var final = Math.floor(Math.random()*20)+1;
+      el.textContent = final;
+      setTimeout(function(){ cb(final); }, 400);
+    }
+  }
+  tick();
+}
+
+function showResult(d20, mod, openly){
+  var total   = openly ? null : d20 + mod;
+  var success, outcomeClass, outcomeText, bodyText, extraText;
+
+  if (openly){
+    success = true; outcomeClass = 'open';
+    outcomeText = 'TAKEN OPENLY';
+    bodyText    = '"You pull it down in full view of the room. The notice is yours — and so is everyone\'s attention for a moment."';
+    extraText   = 'WITNESSED — anyone nearby saw you do this.';
+  } else if (d20 === 1){
+    success = false; outcomeClass = 'fail';
+    outcomeText = '⚠ CRITICAL FAIL — total ' + total + ' vs DC 12';
+    bodyText    = '"The notice slips and flutters to the floor. You scramble after it. Several people turned to look."';
+    extraText   = 'SEEN — and it was graceless. The DM notes this.';
+  } else if (total < 12){
+    success = false; outcomeClass = 'fail';
+    outcomeText = '⚠ FAIL — total ' + total + ' vs DC 12';
+    bodyText    = '"You took it, but someone nearby clocked you as you pulled it free."';
+    extraText   = 'SEEN — someone may remember your face.';
+  } else if (d20 === 20){
+    success = true; outcomeClass = 'suc';
+    outcomeText = '✓ CRITICAL SUCCESS — total ' + total + ' vs DC 12';
+    bodyText    = '"You palmed it so smoothly that the person next to you checked their own pockets."';
+    extraText   = 'UNDETECTED — utterly flawless.';
+  } else {
+    success = true; outcomeClass = 'suc';
+    outcomeText = '✓ SUCCESS — total ' + total + ' vs DC 12';
+    bodyText    = '"You pulled it cleanly. No one saw."';
+    extraText   = 'UNDETECTED — no witnesses.';
+  }
+
+  document.getElementById('res-roll-line').textContent = openly ? 'Taken openly — no roll required.' : ('d20: ' + d20 + (mod !== 0 ? (mod > 0 ? ' + ' : ' ') + mod : '') + ' = ' + total);
+  var oc = document.getElementById('res-outcome');
+  oc.textContent = outcomeText; oc.className = 'fail'; oc.className = 'res-outcome ' + outcomeClass;
+  // fix — set id separately since className overwrites
+  oc.id = 'res-outcome';
+  document.getElementById('res-text').textContent  = bodyText;
+  document.getElementById('res-extra').textContent = extraText;
+
+  if (tornIds.indexOf(tearTargetId) === -1){ tornIds.push(tearTargetId); saveTorn(); }
+  openId = null;
+  setTearState('result');
+}
+
+document.getElementById('t-attempt').addEventListener('click', function(){
+  var mod = parseInt(document.getElementById('tear-mod').value) || 0;
+  rollDice(function(d20){ showResult(d20, mod, false); });
+});
+document.getElementById('t-openly').addEventListener('click', function(){ showResult(null, null, true); });
+document.getElementById('t-cancel').addEventListener('click', closeTearModal);
+document.getElementById('res-close').addEventListener('click', closeTearModal);
+document.getElementById('tear-overlay').addEventListener('click', function(e){ if(e.target===this) closeTearModal(); });
+
+// ── POST FORM ─────────────────────────────────────────────────────────────────
+function openPost(){
+  document.getElementById('post-name').value = '';
+  document.getElementById('post-body').value = '';
+  document.getElementById('post-overlay').classList.add('visible');
+  setTimeout(function(){ document.getElementById('post-body').focus(); }, 80);
+}
+function closePost(){ document.getElementById('post-overlay').classList.remove('visible'); }
+
+document.getElementById('post-note-btn').addEventListener('click', openPost);
+document.getElementById('post-x').addEventListener('click', closePost);
+document.getElementById('post-cancel-btn').addEventListener('click', closePost);
+document.getElementById('post-overlay').addEventListener('click', function(e){ if(e.target===this) closePost(); });
+
+document.getElementById('post-submit').addEventListener('click', function(){
+  var body = document.getElementById('post-body').value.trim();
+  if (!body){
+    var ta = document.getElementById('post-body');
+    ta.style.borderColor = '#7a2020'; ta.focus();
+    setTimeout(function(){ ta.style.borderColor = ''; }, 1800);
+    return;
+  }
+  var name = document.getElementById('post-name').value.trim() || 'Anonymous';
+  var note = {
+    id: 'p' + Date.now(),
+    type:'NOTE', typeLabel:'PINNED NOTE', icon:'&#128204;',
+    pinColour:'#7a7020', paperTone:'#181808', paperBorder:'#353510',
+    title: name === 'Anonymous' ? 'An anonymous note' : 'A note from ' + name,
+    subtitle: body.length > 65 ? body.substring(0,62) + '...' : body,
+    body: body,
+    footer: '— ' + name,
+    age: 'Just now',
+    torn: false,
+  };
+  playerNotices.unshift(note);
+  savePlayer();
+  closePost();
+  filter = 'ALL';
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.filter==='ALL'); });
+  render();
+  showToast('Your note has been pinned to the board.');
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
 render();
 </script>
 </body>
